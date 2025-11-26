@@ -18,7 +18,7 @@ export function ThemeProvider({ children }:ThemeContextProps) {
   );
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);//kgs
+    document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
 
