@@ -1,24 +1,25 @@
 import { createContext, useEffect, useState } from "react";
+import type { Theme } from '../api/types';
 
 
-type Theme = "light" | "dark";
 
 interface ThemeContextProps{
     children: React.ReactNode;
 }
 
+
 export const ThemeContext = createContext<{
-    theme: Theme,
+    theme: Theme;
     toggleTheme: () => void
     }>({theme: 'light', toggleTheme: ()=> {},});
 
 export function ThemeProvider({ children }:ThemeContextProps) {
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") || "light"
+  const [theme, setTheme] = useState<Theme>(
+    (localStorage.getItem("theme") as Theme) || "light"
   );
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);//kgs
     localStorage.setItem("theme", theme);
   }, [theme]);
 
