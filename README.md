@@ -1,4 +1,4 @@
-this the netlify link: https://restcountryapimod11.netlify.app/
+This is the netlify link: https://restcountryapimod11.netlify.app/
 
 # React + TypeScript + Vite
 
