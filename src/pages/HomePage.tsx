@@ -4,17 +4,14 @@ import CountryCard from "../components/CountryCard";
 import FilterRegion from "../components/FilterRegion";
 import { getAllCountries } from "../api/countries";
 import SearchBar from "../components/SearchBar";
+import type { Country } from "../api/types";
 
  function HomePage() {
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState<Country[]>([]);
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState("");
 
-//   useEffect(() => {
-//     fetch("https://restcountries.com/v3.1/all")
-//       .then(res => res.json())
-//       .then(data => setCountries(data));
-//   }, []);
+
 
   useEffect(() => {
     async function fetchCountry() {
@@ -33,10 +30,18 @@ import SearchBar from "../components/SearchBar";
     
   }, []);
 
-  const filtered = countries.filter(c =>
-    c.name.common.toLowerCase().includes(search.toLowerCase()) &&
-    (region ? c.region === region : true)
-  );
+
+
+  const filtered = countries.filter(c => {
+  const matchesSearch = search
+    ? c.name.common.toLowerCase().includes(search.toLowerCase())
+    : true;
+
+  const matchesRegion = region ? c.region === region : true;
+
+  return matchesSearch && matchesRegion;
+});
+
 
   return (
     <div className="container">
